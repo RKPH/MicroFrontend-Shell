@@ -125,7 +125,7 @@ const Header = () => {
                 />
               </svg>
               <span className="absolute top-0 right-0 h-4 w-4 rounded-full bg-yellow-400 text-xs flex items-center justify-center">
-                {count}
+                {count} Counts
               </span>
             </div>
             <svg
