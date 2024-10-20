@@ -8,7 +8,7 @@ export default defineConfig({
     federation({
       name: "shell",
       exposes: {
-        "./counterStore": "./src/Store/CounterStore.js", // Expose Zustand store
+        "./counterStore": "./src/Store/Counterstore.js", // Expose Zustand store
       },
       remotes: {
         homepage:

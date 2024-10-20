@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
 
 import useCounterStore from "../Store/Counterstore";
+
 const Header = () => {
   const count = useCounterStore((state) => state.count); // Subscribe to count
   return (
