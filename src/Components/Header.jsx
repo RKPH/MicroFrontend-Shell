@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
-import { useSelector } from "react-redux"; // Ensure you import useSelector
+
+import useCounterStore from "../Store/Counterstore";
 
 const Header = () => {
-  const count = useSelector((state) => state.counter.count); // Access counter state
-
+  const count = useCounterStore((state) => state.count); // Subscribe to count
   return (
     <header className="w-full h-[121px] bg-black">
       <div className="w-full h-10 bg-black flex items-center justify-center tracking-[1.2px]">
@@ -20,7 +20,7 @@ const Header = () => {
       </div>
       <div className="w-full h-[81px] px-10 bg-white">
         <div className="flex w-full items-center justify-end h-1/3 py-2">
-          <ul className="flex space-x-4">
+          <ul className="flex  space-x-4">
             <a href="#" className="text-xs hover:underline">
               help
             </a>
@@ -125,7 +125,7 @@ const Header = () => {
                 />
               </svg>
               <span className="absolute top-0 right-0 h-4 w-4 rounded-full bg-yellow-400 text-xs flex items-center justify-center">
-                {count} {/* Display the counter value */}
+                {count}
               </span>
             </div>
             <svg
