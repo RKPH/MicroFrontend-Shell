@@ -1,12 +1,11 @@
-import { create } from "zustand";
+// src/store/store.js
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./Counterslice";
 
-const useCounterStore = create((set) => ({
-  count: 0,
-  increaseCount: () =>
-    set((state) => {
-      console.log("Increasing count:", state.count + 1);
-      return { count: state.count + 1 };
-    }),
-}));
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
 
-export default useCounterStore;
+export default store;

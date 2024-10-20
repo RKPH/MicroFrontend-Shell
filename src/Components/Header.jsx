@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
-
-import useCounterStore from "../Store/Counterstore";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
-  const count = useCounterStore((state) => state.count); // Subscribe to count
+  const count = useSelector((state) => state.counter.count); // Access counter state
+
   return (
     <header className="w-full h-[121px] bg-black">
       <div className="w-full h-10 bg-black flex items-center justify-center tracking-[1.2px]">
