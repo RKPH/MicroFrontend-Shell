@@ -66,7 +66,7 @@ const Header = () => {
             <Link to="/Women" className="hover:underline">
               WOMEN
             </Link>
-            <Link to="/" className="hover:underline">
+            <Link to="/Kid" className="hover:underline">
               KIDS
             </Link>
             <Link to="/" className="hover:underline">
