@@ -40,8 +40,8 @@ const Header = () => {
 
         <div className="grid grid-cols-4 items-center w-full px-4">
           {/* Logo Section */}
-          <a
-            href="/en"
+          <Link
+            href="/"
             data-auto-id="logo"
             className="justify-self-start col-span-1"
           >
@@ -56,7 +56,7 @@ const Header = () => {
                 padding: 0,
               }}
             />
-          </a>
+          </Link>
 
           {/* Navigation Links */}
           <div className="flex justify-center space-x-8 text-sm font-semibold col-span-2">
