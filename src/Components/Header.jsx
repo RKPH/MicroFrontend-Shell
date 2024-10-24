@@ -41,7 +41,7 @@ const Header = () => {
         <div className="grid grid-cols-4 items-center w-full px-4">
           {/* Logo Section */}
           <Link
-            href="/"
+            to="/"
             data-auto-id="logo"
             className="justify-self-start col-span-1"
           >
