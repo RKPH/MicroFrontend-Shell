@@ -16,7 +16,7 @@ export default defineConfig({
         ProductPages:
           "https://microfrontend-productpage.vercel.app/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "tailwindcss"],
     }),
   ],
   build: {
