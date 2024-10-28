@@ -1,4 +1,5 @@
 import Header from "../Components/Header";
+import "tailwindcss/tailwind.css";
 import React, { lazy, Suspense } from "react"; // Import Suspense
 import PropTypes from "prop-types";
 const DefaultLayout = ({ children }) => {
