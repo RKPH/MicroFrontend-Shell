@@ -1,6 +1,9 @@
 // src/Layouts/DefaultLayout.jsx
 import Header from "../Components/Header";
+
 import React, { lazy, Suspense } from "react";
+import "tailwindcss/tailwind.css";
+
 import PropTypes from "prop-types";
 import Chatbot from "../Components/Chatbot";
 
