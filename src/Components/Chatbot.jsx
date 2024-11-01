@@ -1,9 +1,7 @@
-// src/Components/Chatbot.jsx
 import React, { useState } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import "./Chatbot.css";
 
-// Product data generation function
 const categories = [
   "DropSet",
   "Adizero",
@@ -53,27 +51,20 @@ const products = generateProducts(categories);
 
 const parseUserPreferences = (input) => {
   const lowerInput = input.toLowerCase();
-
-  // Detect gender
   const genderCategory =
     lowerInput.includes("girl") || lowerInput.includes("woman")
       ? "Women"
       : lowerInput.includes("boy") || lowerInput.includes("man")
       ? "Men"
       : null;
-
-  // Detect interest
   const interestCategory = categories.find((category) =>
     lowerInput.includes(category.toLowerCase())
   );
-
   return { genderCategory, interestCategory };
 };
 
 const recommendProducts = (input) => {
   const { genderCategory, interestCategory } = parseUserPreferences(input);
-
-  // Filter products based on detected preferences
   const filteredProducts = products.filter((product) => {
     const isGenderMatched = genderCategory
       ? product.category === genderCategory
@@ -81,27 +72,13 @@ const recommendProducts = (input) => {
     const isInterestMatched = interestCategory
       ? product.category === interestCategory
       : true;
-
-    // Allow yoga products to match for both genders
-    const isYogaMatch = product.category === "Yoga";
-
-    return isYogaMatch || (isGenderMatched && isInterestMatched);
+    return isGenderMatched && isInterestMatched;
   });
 
-  // Select unique products from gender and interest categories
-  const genderProducts = genderCategory
-    ? products.filter((p) => p.category === genderCategory)
-    : [];
-  const interestProducts = interestCategory
-    ? products.filter((p) => p.category === interestCategory)
-    : [];
-
-  // Combine both product lists and remove duplicates
-  const uniqueRecommendations = [
-    ...new Set([...interestProducts, ...genderProducts]),
-  ];
-
-  // Select 2-3 unique items to recommend
+  // Remove duplicates and select unique products
+  const uniqueRecommendations = Array.from(
+    new Map(filteredProducts.map((p) => [p.name, p])).values()
+  );
   const recommendations = uniqueRecommendations.slice(0, 3);
 
   if (recommendations.length === 0) {
@@ -135,7 +112,7 @@ const Chatbot = () => {
     const userMessage = { sender: "user", text: input };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-    // Generate a bot response based on the input
+    // Generate a bot response
     const botResponse = generateResponse(input);
     setMessages((prevMessages) => [...prevMessages, botResponse]);
 
@@ -152,10 +129,12 @@ const Chatbot = () => {
 
   return (
     <div className="chatbot-container">
+      {/* Chatbot Icon */}
       <button onClick={toggleChat} className="chatbot-icon">
         <IoChatbubblesOutline size={30} />
       </button>
 
+      {/* Chat Window */}
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
