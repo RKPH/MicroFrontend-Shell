@@ -72,7 +72,7 @@ const Header = () => {
             <Link to="/" className="hover:underline">
               SPORTS
             </Link>
-            <Link to="/" className="hover:underline">
+            <Link to="/Brands" className="hover:underline">
               BRANDS
             </Link>
             <Link to="/" className="hover:underline">

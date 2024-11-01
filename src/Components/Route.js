@@ -1,11 +1,13 @@
 import React, { lazy, Suspense } from "react"; // Import Suspense
 
 const HomePage = lazy(() => import("homepage/HomePage"));
-const MenPage = lazy(() => import("ProductPages/MenPage"));
+const MenPage = lazy(() => import("ProductPages/Men-Page"));
 
 const WomenPage = lazy(() => import("ProductPages/WomenPage"));
 
 const KidPage = lazy(() => import("ProductPages/KidsPage"));
+
+const BrandsPage = lazy(() => import("ProductPages/BrandssPage"));
 
 export const publicRoutes = [
   {
@@ -23,5 +25,9 @@ export const publicRoutes = [
   {
     path: "/Kid",
     component: KidPage,
+  },
+  {
+    path: "/Brands",
+    component: BrandsPage,
   },
 ];
