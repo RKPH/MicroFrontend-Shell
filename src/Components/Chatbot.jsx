@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import "./Chatbot.css";
 
@@ -28,7 +28,6 @@ const categories = [
 const generateProducts = (categories) => {
   const products = [];
   const categoryCount = {};
-
   for (let i = 0; i < 200; i++) {
     const category = categories[i % categories.length];
     if (!categoryCount[category]) {
@@ -66,7 +65,6 @@ const parseUserPreferences = (input) => {
 const recommendProducts = (input) => {
   const { genderCategory, interestCategory } = parseUserPreferences(input);
 
-  // Check if the input matches any product name exactly
   const exactMatch = products.find((product) =>
     product.name.toLowerCase().includes(input.toLowerCase())
   );
@@ -75,7 +73,6 @@ const recommendProducts = (input) => {
     return `Here is the product you requested: <strong>${exactMatch.name}</strong> for ${exactMatch.price}.`;
   }
 
-  // Prepare to filter products based on gender and interest categories
   const genderFilteredProducts = genderCategory
     ? products.filter((product) => {
         return (
@@ -90,7 +87,6 @@ const recommendProducts = (input) => {
     ? products.filter((product) => product.category === interestCategory)
     : [];
 
-  // Combine results while ensuring uniqueness
   const uniqueProductsMap = new Map();
 
   genderFilteredProducts.slice(0, 3).forEach((product) => {
@@ -118,6 +114,7 @@ const Chatbot = () => {
     { sender: "bot", text: "Hello! How can I assist you today?" },
   ]);
   const [input, setInput] = useState("");
+  const chatContentRef = useRef(null);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -139,12 +136,40 @@ const Chatbot = () => {
     setInput("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
+    }
+  };
+
   const generateResponse = (input) => {
+    const greetings = [
+      "Hi there!",
+      "Hello! How can I help you?",
+      "Hey! What's up?",
+      "Greetings! What can I do for you?",
+      "Hi! How can I assist you today?",
+    ];
+    const trimmedInput = input.trim().toLowerCase();
+
+    if (["hi", "hello", "hey"].includes(trimmedInput)) {
+      return {
+        sender: "bot",
+        text: greetings[Math.floor(Math.random() * greetings.length)],
+      };
+    }
+
     return {
       sender: "bot",
       text: recommendProducts(input),
     };
   };
+
+  useEffect(() => {
+    if (chatContentRef.current) {
+      chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   return (
     <div className="chatbot-container">
@@ -160,7 +185,7 @@ const Chatbot = () => {
               ✖
             </button>
           </div>
-          <div className="chat-content">
+          <div className="chat-content" ref={chatContentRef}>
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
                 <span dangerouslySetInnerHTML={{ __html: msg.text }} />
@@ -172,6 +197,7 @@ const Chatbot = () => {
               type="text"
               value={input}
               onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
               placeholder="Type a message..."
             />
             <button onClick={handleSendMessage}>Send</button>
