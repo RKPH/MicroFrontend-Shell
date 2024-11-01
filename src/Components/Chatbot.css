@@ -75,3 +75,24 @@
   border: none;
   cursor: pointer;
 }
+/* src/Components/Chatbot.css */
+
+.message {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.user {
+  background-color: #0078ff;
+  color: white;
+  align-self: flex-end;
+}
+
+.bot {
+  background-color: #ddd;
+  color: #333;
+  align-self: flex-start;
+}
