@@ -83,15 +83,26 @@ const recommendProducts = (input) => {
       : true;
 
     // Allow yoga products to match for both genders
-    const isYogaMatch =
-      product.category === "Yoga" &&
-      (genderCategory === "Women" || genderCategory === "Men");
+    const isYogaMatch = product.category === "Yoga";
 
     return isYogaMatch || (isGenderMatched && isInterestMatched);
   });
 
-  // Select 2-3 items to recommend
-  const recommendations = filteredProducts.slice(0, 3);
+  // Select unique products from gender and interest categories
+  const genderProducts = genderCategory
+    ? products.filter((p) => p.category === genderCategory)
+    : [];
+  const interestProducts = interestCategory
+    ? products.filter((p) => p.category === interestCategory)
+    : [];
+
+  // Combine both product lists and remove duplicates
+  const uniqueRecommendations = [
+    ...new Set([...interestProducts, ...genderProducts]),
+  ];
+
+  // Select 2-3 unique items to recommend
+  const recommendations = uniqueRecommendations.slice(0, 3);
 
   if (recommendations.length === 0) {
     return "I couldn't find any matching products based on your preferences. Try broadening your interests or categories!";
