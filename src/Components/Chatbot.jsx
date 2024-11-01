@@ -65,29 +65,50 @@ const parseUserPreferences = (input) => {
 
 const recommendProducts = (input) => {
   const { genderCategory, interestCategory } = parseUserPreferences(input);
-  const filteredProducts = products.filter((product) => {
-    const isGenderMatched = genderCategory
-      ? product.category === genderCategory
-      : true;
-    const isInterestMatched = interestCategory
-      ? product.category === interestCategory
-      : true;
-    const isYogaMatch = product.category === "Yoga";
-    return isYogaMatch || (isGenderMatched && isInterestMatched);
+
+  // Check if the input matches any product name exactly
+  const exactMatch = products.find((product) =>
+    product.name.toLowerCase().includes(input.toLowerCase())
+  );
+
+  if (exactMatch) {
+    return `Here is the product you requested: <strong>${exactMatch.name}</strong> for ${exactMatch.price}.`;
+  }
+
+  // Prepare to filter products based on gender and interest categories
+  const genderFilteredProducts = genderCategory
+    ? products.filter((product) => {
+        return (
+          (genderCategory === "Women" && product.category === "Women") ||
+          (genderCategory === "Men" && product.category === "Men") ||
+          (genderCategory === "Kids" && product.category === "Kids")
+        );
+      })
+    : [];
+
+  const interestFilteredProducts = interestCategory
+    ? products.filter((product) => product.category === interestCategory)
+    : [];
+
+  // Combine results while ensuring uniqueness
+  const uniqueProductsMap = new Map();
+
+  genderFilteredProducts.slice(0, 3).forEach((product) => {
+    uniqueProductsMap.set(product.name, product);
   });
 
-  // Remove duplicates and select unique products
-  const uniqueRecommendations = Array.from(
-    new Map(filteredProducts.map((p) => [p.name, p])).values()
-  );
-  const recommendations = uniqueRecommendations.slice(0, 3);
+  interestFilteredProducts.slice(0, 3).forEach((product) => {
+    uniqueProductsMap.set(product.name, product);
+  });
 
-  if (recommendations.length === 0) {
+  const uniqueRecommendations = Array.from(uniqueProductsMap.values());
+
+  if (uniqueRecommendations.length === 0) {
     return "I couldn't find any matching products based on your preferences. Try broadening your interests or categories!";
   }
 
-  return `Here are some products you might like: ${recommendations
-    .map((p) => `${p.name} for ${p.price}`)
+  return `Here are some products you might like: ${uniqueRecommendations
+    .map((p) => `<strong>${p.name}</strong> for ${p.price}`)
     .join(", ")}.`;
 };
 
@@ -142,7 +163,7 @@ const Chatbot = () => {
           <div className="chat-content">
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
-                {msg.text}
+                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
               </div>
             ))}
           </div>
