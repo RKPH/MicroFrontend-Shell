@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react"; // Import Suspense
 
 const HomePage = lazy(() => import("homepage/HomePage"));
-const MenPage = lazy(() => import("ProductPages/Men-Page"));
+const MenPage = lazy(() => import("ProductPages/MenPage"));
 
 const WomenPage = lazy(() => import("ProductPages/WomenPage"));
 

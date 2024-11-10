@@ -1,26 +1,253 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
-
 import useCounterStore from "../Store/Counterstore";
 
 const Header = () => {
-  const count = useCounterStore((state) => state.count); // Subscribe to count
+  const count = useCounterStore((state) => state.count);
+  const [activeMenu, setActiveMenu] = useState(null);
+  let hideTimeout;
+
+  const handleMouseEnter = (menu) => {
+    clearTimeout(hideTimeout);
+    setActiveMenu(menu);
+  };
+
+  const handleMouseLeave = () => {
+    hideTimeout = setTimeout(() => {
+      setActiveMenu(null);
+    }, 200);
+  };
+
+  // Updated menuItems with subitems
+  const menuItems = [
+    {
+      label: "MEN",
+      url: "/men",
+      classNames: "font-bold",
+      items: [
+        {
+          items: [
+            {
+              label: "Features",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "New Arrivals", icon: "pi pi-shirt" },
+                { label: "11.11 Sales", icon: "pi pi-jacket" },
+                { label: "Release dates", icon: "pi pi-shirt" },
+                { label: "Member exclusives", icon: "pi pi-jacket" },
+                { label: "This week top sellers", icon: "pi pi-shirt" },
+                { label: "Z.N.E", icon: "pi pi-jacket" },
+                { label: "Samba", icon: "pi pi-shirt" },
+                { label: "Gazelle", icon: "pi pi-jacket" },
+                { label: "Special", icon: "pi pi-shirt" },
+                { label: "SL 72", icon: "pi pi-jacket" },
+                { label: "Superstar", icon: "pi pi-shirt" },
+                { label: "Stan Smith", icon: "pi pi-jacket" },
+                { label: "Campus", icon: "pi pi-jacket" },
+                { label: "Forum", icon: "pi pi-shirt" },
+                { label: "addidas Essentials", icon: "pi pi-jacket" },
+              ],
+            },
+            {
+              label: "Shoes",
+              icon: "pi pi-shoe",
+              subitems: [
+                { label: "New Arrivals", icon: "pi pi-shoe" },
+                { label: "Originals", icon: "pi pi-boot" },
+                { label: "Football", icon: "pi pi-shoe" },
+                { label: "Training", icon: "pi pi-boot" },
+                { label: "Running", icon: "pi pi-shoe" },
+                { label: "Outdoor", icon: "pi pi-boot" },
+                { label: "Basketball", icon: "pi pi-shoe" },
+                { label: "Slides", icon: "pi pi-boot" },
+                { label: "Tennis", icon: "pi pi-boot" },
+                { label: "Sportwear", icon: "pi pi-shoe" },
+                { label: "Golf", icon: "pi pi-boot" },
+                { label: "Black sneakers", icon: "pi pi-shoe" },
+                { label: "Must have shoes", icon: "pi pi-boot" },
+              ],
+            },
+            {
+              label: "Clothing",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "T-shirts", icon: "pi pi-tshirt" },
+                { label: "Jeans", icon: "pi pi-jeans" },
+              ],
+            },
+            {
+              label: "Accessories",
+              icon: "pi pi-wallet",
+              subitems: [
+                { label: "Bags", icon: "pi pi-bag" },
+                { label: "Hats", icon: "pi pi-hat" },
+              ],
+            },
+            {
+              label: "Sports",
+              icon: "pi pi-wallet",
+              subitems: [
+                { label: "Bags", icon: "pi pi-bag" },
+                { label: "Hats", icon: "pi pi-hat" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "WOMEN",
+      url: "/women",
+      classNames: "font-bold",
+      items: [
+        {
+          items: [
+            {
+              label: "Features",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "Shirts", icon: "pi pi-shirt" },
+                { label: "Jackets", icon: "pi pi-jacket" },
+              ],
+            },
+            {
+              label: "Shoes",
+              icon: "pi pi-shoe",
+              subitems: [
+                { label: "Running Shoes", icon: "pi pi-shoe" },
+                { label: "Boots", icon: "pi pi-boot" },
+              ],
+            },
+            {
+              label: "Clothing",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "T-shirts", icon: "pi pi-tshirt" },
+                { label: "Jeans", icon: "pi pi-jeans" },
+              ],
+            },
+            {
+              label: "Accessories",
+              icon: "pi pi-wallet",
+              subitems: [
+                { label: "Bags", icon: "pi pi-bag" },
+                { label: "Hats", icon: "pi pi-hat" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "KIDS",
+      url: "/kids",
+      classNames: "font-bold",
+      items: [
+        {
+          items: [
+            {
+              label: "Toys",
+              icon: "pi pi-toy",
+              subitems: [
+                { label: "Action Figures", icon: "pi pi-toy" },
+                { label: "Dolls", icon: "pi pi-toy" },
+              ],
+            },
+            {
+              label: "Clothing",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "T-shirts", icon: "pi pi-tshirt" },
+                { label: "Jeans", icon: "pi pi-jeans" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Sports",
+      url: "/sports",
+      classNames: "font-normal",
+      items: [
+        {
+          items: [
+            {
+              label: "Clothing",
+              icon: "pi pi-shirt",
+              subitems: [
+                { label: "T-shirts", icon: "pi pi-tshirt" },
+                { label: "Jeans", icon: "pi pi-jeans" },
+              ],
+            },
+            {
+              label: "Shoes",
+              icon: "pi pi-shoe",
+              subitems: [
+                { label: "T-shirts", icon: "pi pi-tshirt" },
+                { label: "Jeans", icon: "pi pi-jeans" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Brands",
+      url: "/brands",
+      classNames: "font-normal",
+      items: [
+        {
+          items: [
+            { label: "Clothing", icon: "pi pi-shirt" },
+            { label: "Shoes", icon: "pi pi-shoe" },
+          ],
+        },
+      ],
+    },
+    {
+      label: "New Arrivals",
+      url: "/brands",
+      classNames: "font-normal",
+      items: [
+        {
+          items: [
+            { label: "Clothing", icon: "pi pi-shirt" },
+            { label: "Shoes", icon: "pi pi-shoe" },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Outlets",
+      url: "",
+      classNames: "font-normal text-red-500",
+      items: [
+        {
+          items: [
+            { label: "Clothing", icon: "pi pi-shirt" },
+            { label: "Shoes", icon: "pi pi-shoe" },
+          ],
+        },
+      ],
+    },
+  ];
+
   return (
-    <header className="w-full h-[121px] bg-black">
+    <header className="w-full h-[121px] bg-black relative">
       <div className="w-full h-10 bg-black flex items-center justify-center tracking-[1.2px]">
-        <button className="h-full text-[11px] font-[AdihausDIN] uppercase font-bold text-white px-10 hover:opacity-50 hover:bg-gray-800 ">
+        <button className="h-full text-[11px] font-[AdihausDIN] uppercase font-bold text-white px-10 hover:opacity-50 hover:bg-gray-800">
           Easy return{" "}
           <span>
-            {" "}
             <ExpandMoreIcon />{" "}
           </span>
         </button>
       </div>
       <div className="w-full h-[81px] px-10 bg-white">
         <div className="flex w-full items-center justify-end h-1/3 py-2">
-          <ul className="flex  space-x-4">
+          <ul className="flex space-x-4">
             <a href="#" className="text-xs hover:underline">
               help
             </a>
@@ -38,13 +265,8 @@ const Header = () => {
           </ul>
         </div>
 
-        <div className="grid grid-cols-4 items-center w-full px-4">
-          {/* Logo Section */}
-          <Link
-            to="/"
-            data-auto-id="logo"
-            className="justify-self-start col-span-1"
-          >
+        <nav className="grid grid-cols-4 items-center w-full px-4">
+          <Link to="/" className="justify-self-start col-span-1">
             <img
               src={logo}
               alt="Logo"
@@ -58,32 +280,22 @@ const Header = () => {
             />
           </Link>
 
-          {/* Navigation Links */}
-          <div className="flex justify-center space-x-8 text-sm font-semibold col-span-2">
-            <Link to="/Men" className="px-3 hover:underline">
-              MEN
-            </Link>
-            <Link to="/Women" className="hover:underline">
-              WOMEN
-            </Link>
-            <Link to="/Kid" className="hover:underline">
-              KIDS
-            </Link>
-            <Link to="/" className="hover:underline">
-              SPORTS
-            </Link>
-            <Link to="/Brands" className="hover:underline">
-              BRANDS
-            </Link>
-            <Link to="/" className="hover:underline">
-              NEW ARRIVALS
-            </Link>
-            <Link to="/" className="text-red-500 hover:underline">
-              OUTLET
-            </Link>
-          </div>
+          <ul
+            className="flex justify-center text-sm font-semibold col-span-2"
+            onMouseLeave={handleMouseLeave}
+          >
+            {menuItems.map((menu) => (
+              <Link
+                key={menu.label}
+                to={menu.url}
+                className={` ${menu.classNames} px-3 hover:underline  uppercase`}
+                onMouseEnter={() => handleMouseEnter(menu.label)}
+              >
+                {menu.label}
+              </Link>
+            ))}
+          </ul>
 
-          {/* Search and Icons */}
           <div className="flex items-center justify-end space-x-4 col-span-1">
             <input
               type="text"
@@ -139,12 +351,54 @@ const Header = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M21 11.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v4.5m18 0v6.75a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6.75m18 0H3"
+                d="M21 11.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v4.5m18 0v6.75a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V11.25"
               />
             </svg>
           </div>
-        </div>
+        </nav>
       </div>
+
+      {/* Submenu Render Logic */}
+      {activeMenu && (
+        <div
+          className="absolute top-[121px] left-0 w-full bg-white shadow-lg z-50"
+          onMouseEnter={() => clearTimeout(hideTimeout)}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="flex justify-center space-x-10">
+            {menuItems
+              .filter((menu) => menu.label === activeMenu)
+              .map((menu) =>
+                menu.items.map((section) =>
+                  section.items.map((item) =>
+                    item.subitems ? (
+                      <div
+                        key={item.label}
+                        className="flex flex-col px-10 py-3 "
+                      >
+                        <Link
+                          to={item.label}
+                          className="font-semibold uppercase hover:underline"
+                        >
+                          {item.label}
+                        </Link>
+                        {item.subitems.map((subitem) => (
+                          <Link
+                            key={subitem.label}
+                            to={`/subcategory/${subitem.label.toLowerCase()}`}
+                            className="text-sm py-1 text-gray-700 hover:underline"
+                          >
+                            {subitem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null
+                  )
+                )
+              )}
+          </div>
+        </div>
+      )}
     </header>
   );
 };
