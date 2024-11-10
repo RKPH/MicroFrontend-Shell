@@ -142,7 +142,7 @@ const Header = () => {
     },
     {
       label: "KIDS",
-      url: "/kids",
+      url: "/Kid",
       classNames: "font-bold",
       items: [
         {
