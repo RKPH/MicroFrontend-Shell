@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
 import useCounterStore from "../Store/Counterstore";
+import { classNames } from "primereact/utils";
 
 const Header = () => {
   const count = useCounterStore((state) => state.count);
@@ -34,7 +35,11 @@ const Header = () => {
               icon: "pi pi-shirt",
               subitems: [
                 { label: "New Arrivals", icon: "pi pi-shirt" },
-                { label: "11.11 Sales", icon: "pi pi-jacket" },
+                {
+                  label: "11.11 Sales",
+                  icon: "pi pi-jacket",
+                  classNames: "uppercase text-red-500",
+                },
                 { label: "Release dates", icon: "pi pi-shirt" },
                 { label: "Member exclusives", icon: "pi pi-jacket" },
                 { label: "This week top sellers", icon: "pi pi-shirt" },
@@ -288,6 +293,7 @@ const Header = () => {
               <Link
                 key={menu.label}
                 to={menu.url}
+                onClick={() => setActiveMenu(null)}
                 className={` ${menu.classNames} px-3 hover:underline  uppercase`}
                 onMouseEnter={() => handleMouseEnter(menu.label)}
               >
@@ -386,7 +392,7 @@ const Header = () => {
                           <Link
                             key={subitem.label}
                             to={`/subcategory/${subitem.label.toLowerCase()}`}
-                            className="text-sm py-1 text-gray-700 hover:underline"
+                            className={`text-sm py-1  hover:underline ${subitem.classNames}`}
                           >
                             {subitem.label}
                           </Link>
