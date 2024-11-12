@@ -259,7 +259,7 @@ const Header = () => {
             <a href="#" className="text-xs hover:underline">
               order tracker
             </a>
-            <Link to="Login" className="text-xs hover:underline">
+            <Link to="/Login" className="text-xs hover:underline">
               become a member
             </Link>
             <img
