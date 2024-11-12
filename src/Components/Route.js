@@ -8,6 +8,7 @@ const WomenPage = lazy(() => import("ProductPages/WomenPage"));
 const KidPage = lazy(() => import("ProductPages/KidsPage"));
 
 const BrandsPage = lazy(() => import("ProductPages/BrandssPage"));
+const LoginPage = lazy(() => import("homepage/Login"));
 
 export const publicRoutes = [
   {
@@ -29,5 +30,9 @@ export const publicRoutes = [
   {
     path: "/Brands",
     component: BrandsPage,
+  },
+  {
+    path: "/Login",
+    component: LoginPage,
   },
 ];

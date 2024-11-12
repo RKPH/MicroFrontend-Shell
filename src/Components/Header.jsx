@@ -259,9 +259,9 @@ const Header = () => {
             <a href="#" className="text-xs hover:underline">
               order tracker
             </a>
-            <a href="#" className="text-xs hover:underline">
+            <Link to="Login" className="text-xs hover:underline">
               become a member
-            </a>
+            </Link>
             <img
               src="https://flagcdn.com/w40/vn.png"
               alt="Vietnam flag"

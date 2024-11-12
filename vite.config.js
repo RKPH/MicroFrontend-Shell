@@ -15,6 +15,7 @@ export default defineConfig({
           "https://micro-front-end-sport-ecommerce-homepage.vercel.app/assets/remoteEntry.js",
         ProductPages:
           "https://microfrontend-productpage.vercel.app/assets/remoteEntry.js",
+        login: "https://r-d-frontend.vercel.app/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom", "tailwindcss"],
     }),
