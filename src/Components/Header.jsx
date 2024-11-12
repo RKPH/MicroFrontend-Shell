@@ -290,6 +290,7 @@ const Header = () => {
                 to={menu.url}
                 className={` ${menu.classNames} px-3 hover:underline  uppercase`}
                 onMouseEnter={() => handleMouseEnter(menu.label)}
+                onClick={()=>{setActiveMenu(null)}}
               >
                 {menu.label}
               </Link>
