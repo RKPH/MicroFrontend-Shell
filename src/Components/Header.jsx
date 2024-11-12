@@ -296,6 +296,7 @@ const Header = () => {
                 onClick={() => setActiveMenu(null)}
                 className={` ${menu.classNames} px-3 hover:underline  uppercase`}
                 onMouseEnter={() => handleMouseEnter(menu.label)}
+                onClick={()=>{setActiveMenu(null)}}
               >
                 {menu.label}
               </Link>
