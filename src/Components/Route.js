@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react"; // Import Suspense
+import NoheaderLayout from "../Layout/NoheaderLayout";
 
 const HomePage = lazy(() => import("homepage/HomePage"));
 const MenPage = lazy(() => import("ProductPages/MenPage"));
@@ -34,5 +35,6 @@ export const publicRoutes = [
   {
     path: "/Login",
     component: LoginPage,
+    layout: NoheaderLayout,
   },
 ];
