@@ -128,20 +128,13 @@ const Chatbot = () => {
         if (input.trim() === "") return;
 
         const userMessage = {sender: "user", text: input};
+        setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-        // Directly generate the bot's response here
         const botResponse = generateResponse(input);
+        setMessages((prevMessages) => [...prevMessages, botResponse]);
 
-        // Update both the user message and bot response in one state update
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            userMessage,
-            botResponse,
-        ]);
-
-        setInput(""); // Clear input after sending
+        setInput("");
     };
-
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
