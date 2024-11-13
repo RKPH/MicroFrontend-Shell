@@ -128,12 +128,16 @@ const Chatbot = () => {
         if (input.trim() === "") return;
 
         const userMessage = {sender: "user", text: input};
-        setMessages((prevMessages) => [...prevMessages, userMessage]);
-
         const botResponse = generateResponse(input);
-        setMessages((prevMessages) => [...prevMessages, botResponse]);
 
-        setInput("");
+        // Update messages in a single setState call
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            userMessage,
+            botResponse,
+        ]);
+
+        setInput(""); // Clear input after sending
     };
 
     const handleKeyPress = (e) => {
