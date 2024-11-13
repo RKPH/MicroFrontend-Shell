@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../assets/logo.png";
+import user from "../../public/user.png"
 import useCounterStore from "../Store/Counterstore";
 
 const Header = () => {
@@ -327,25 +328,7 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="relative h-12 w-12 flex items-center justify-center">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-6 h-6"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15.75 9A3.75 3.75 0 1112 5.25 3.75 3.75 0 0115.75 9z"
-                                />
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M19.5 18a7.5 7.5 0 00-15 0"
-                                />
-                            </svg>
+                            <img src={user} className="w-6 h-6"/>
                             <span
                                 className="absolute top-0 left-1/2 h-5 w-5 rounded-full bg-yellow-400 text-xs flex items-center justify-center"
                             >
