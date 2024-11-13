@@ -1,51 +1,38 @@
-import { Fragment } from "react";
+import { useState } from "react";
 import DefaultLayout from "./Layout/DefaultLayout";
 import { publicRoutes } from "./Components/Route";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-
-
-function AnimatedRoutes() {
-    const location = useLocation(); // Now useLocation is correctly inside Router
-
-    return (
-        <TransitionGroup>
-            <CSSTransition key={location.key} classNames="fade" timeout={300}>
-                <Routes location={location}>
-                    {publicRoutes.map((route, index) => {
-                        const Page = route.component;
-                        let Layout = DefaultLayout;
-
-                        if (route.layout) {
-                            Layout = route.layout;
-                        } else if (route.layout === null) {
-                            Layout = Fragment;
-                        }
-
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
-                                }
-                            />
-                        );
-                    })}
-                </Routes>
-            </CSSTransition>
-        </TransitionGroup>
-    );
-}
+import { Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-    return (
-        <Router>
-            <AnimatedRoutes />
-        </Router>
-    );
+  return (
+    <div>
+      <Router>
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            if (route.layout) {
+              Layout = route.layout;
+            } else if (route.layout === null) {
+              Layout = Fragment;
+            }
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              />
+            );
+          })}
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
