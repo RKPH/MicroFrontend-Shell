@@ -3,7 +3,7 @@ import DefaultLayout from "./Layout/DefaultLayout";
 import { publicRoutes } from "./Components/Route";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import './transitions.css'; // Import CSS for transitions
+
 
 function AnimatedRoutes() {
     const location = useLocation(); // Now useLocation is correctly inside Router
