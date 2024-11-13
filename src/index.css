@@ -2,3 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 /* Example CSS for hover behavior */
+/* transitions.css */
+
+/* Initial state when the component enters */
+.fade-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* Final state when the component enters (animation in progress) */
+.fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+/* Initial state when the component exits */
+.fade-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Final state when the component exits (animation in progress) */
+.fade-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}

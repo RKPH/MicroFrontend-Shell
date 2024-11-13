@@ -1,38 +1,46 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import DefaultLayout from "./Layout/DefaultLayout";
 import { publicRoutes } from "./Components/Route";
-import { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function App() {
-  return (
-    <div>
-      <Router>
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            const Page = route.component;
-            let Layout = DefaultLayout;
-            if (route.layout) {
-              Layout = route.layout;
-            } else if (route.layout === null) {
-              Layout = Fragment;
-            }
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
-      </Router>
-    </div>
-  );
+    const location = useLocation();
+
+    return (
+        <div>
+            <Router>
+                <TransitionGroup>
+                    <CSSTransition key={location.key} classNames="fade" timeout={300}>
+                        <Routes location={location}>
+                            {publicRoutes.map((route, index) => {
+                                const Page = route.component;
+                                let Layout = DefaultLayout;
+
+                                if (route.layout) {
+                                    Layout = route.layout;
+                                } else if (route.layout === null) {
+                                    Layout = Fragment;
+                                }
+
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={
+                                            <Layout>
+                                                <Page />
+                                            </Layout>
+                                        }
+                                    />
+                                );
+                            })}
+                        </Routes>
+                    </CSSTransition>
+                </TransitionGroup>
+            </Router>
+        </div>
+    );
 }
 
 export default App;
