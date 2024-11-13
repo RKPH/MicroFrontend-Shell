@@ -27,7 +27,7 @@ const DefaultLayout = ({children}) => {
             {/* Reset ErrorBoundary key when path changes */}
             <ErrorBoundary key={location.pathname}>
                 <Suspense fallback={
-                    <div className="w-full h-full flex items-center justify-center ">
+                    <div className="w-full h-full flex items-center justify-center">
                         <ScaleLoader
                             color={color}
                             loading={loading}
@@ -41,7 +41,7 @@ const DefaultLayout = ({children}) => {
                     {children}
                 </Suspense>
             </ErrorBoundary>
-            <Chatbot/>
+            {/*/!*<Chatbot/>*  uncomment this to use your chat/}*/}
         </div>
     );
 };
