@@ -65,14 +65,17 @@ const parseUserPreferences = (input) => {
 const recommendProducts = (input) => {
     const {genderCategory, interestCategory} = parseUserPreferences(input);
 
+    // Check for an exact match
     const exactMatch = products.find((product) =>
         product.name.toLowerCase().includes(input.toLowerCase())
     );
 
     if (exactMatch) {
+        // If an exact match is found, don't add additional category-based matches
         return `Here is the product you requested: <strong>${exactMatch.name}</strong> for ${exactMatch.price}.`;
     }
 
+    // Otherwise, filter products based on gender or interest category
     const genderFilteredProducts = genderCategory
         ? products.filter((product) => {
             return (
@@ -87,26 +90,25 @@ const recommendProducts = (input) => {
         ? products.filter((product) => product.category === interestCategory)
         : [];
 
-    const uniqueProductsMap = new Map();
+    // Combine both filtered lists and remove duplicates
+    const combinedProducts = [
+        ...new Map([
+            ...genderFilteredProducts,
+            ...interestFilteredProducts,
+        ].map((item) => [item.name, item])).values(),
+    ];
 
-    genderFilteredProducts.slice(0, 3).forEach((product) => {
-        uniqueProductsMap.set(product.name, product);
-    });
-
-    interestFilteredProducts.slice(0, 3).forEach((product) => {
-        uniqueProductsMap.set(product.name, product);
-    });
-
-    const uniqueRecommendations = Array.from(uniqueProductsMap.values());
-
-    if (uniqueRecommendations.length === 0) {
+    // If no matching products were found, provide a fallback message
+    if (combinedProducts.length === 0) {
         return "I couldn't find any matching products based on your preferences. Try broadening your interests or categories!";
     }
 
-    return `Here are some products you might like: ${uniqueRecommendations
+    return `Here are some products you might like: ${combinedProducts
+        .slice(0, 3) // Limit the number of suggestions if necessary
         .map((p) => `<strong>${p.name}</strong> for ${p.price}`)
         .join(", ")}.`;
 };
+
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
