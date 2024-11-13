@@ -326,7 +326,7 @@ const Header = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className="relative">
+                        <div className="relative h-12 w-12">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
