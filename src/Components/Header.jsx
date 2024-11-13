@@ -326,7 +326,7 @@ const Header = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className="relative h-12 w-12 flex items-center">
+                        <div className="relative h-12 w-12 flex items-center justify-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -347,7 +347,7 @@ const Header = () => {
                                 />
                             </svg>
                             <span
-                                className="absolute top-0 left-1/2  h-4 w-4 rounded-full bg-yellow-400 text-xs flex items-center justify-center"
+                                className="absolute top-0 left-1/2 h-5 w-5 rounded-full bg-yellow-400 text-xs flex items-center justify-center"
                             >
                               {count}
                             </span>
