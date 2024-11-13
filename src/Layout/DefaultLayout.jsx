@@ -27,12 +27,12 @@ const DefaultLayout = ({children}) => {
             {/* Reset ErrorBoundary key when path changes */}
             <ErrorBoundary key={location.pathname}>
                 <Suspense fallback={
-                    <div className="w-full h-full flex items-center justify-center bg-red-200">
+                    <div className="w-full h-full flex items-center justify-center ">
                         <ScaleLoader
                             color={color}
                             loading={loading}
                             cssOverride={override}
-                            size={150}
+                            size={250}
                             aria-label="Loading Spinner"
                             data-testid="loader"
                         />
