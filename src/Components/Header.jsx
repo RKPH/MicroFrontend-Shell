@@ -303,61 +303,66 @@ const Header = () => {
           </ul>
 
           <div className="flex items-center justify-end space-x-4 col-span-1">
-            <input
-              type="text"
-              placeholder="Search"
-              className="bg-gray-100 px-3 py-2 rounded-md text-sm outline-none"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-4.35-4.35m1.085-5.365a6.375 6.375 0 11-12.75 0 6.375 6.375 0 0112.75 0z"
+            <div className="flex items-center bg-gray-100 px-3 py-2 rounded-md text-sm">
+              <input
+                  type="text"
+                  placeholder="Search"
+                  className="bg-gray-100 outline-none flex-grow"
               />
-            </svg>
+              <div className="ml-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-gray-600"
+                >
+                  <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-4.35-4.35m1.085-5.365a6.375 6.375 0 11-12.75 0 6.375 6.375 0 0112.75 0z"
+                  />
+                </svg>
+              </div>
+            </div>
             <div className="relative">
               <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+              >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9A3.75 3.75 0 1112 5.25 3.75 3.75 0 0115.75 9z"
+                />
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 18a7.5 7.5 0 00-15 0"
+                />
+              </svg>
+              <span
+                  className="absolute top-0 right-0 h-4 w-4 rounded-full bg-yellow-400 text-xs flex items-center justify-center">
+                {count}
+              </span>
+            </div>
+            <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 9A3.75 3.75 0 1112 5.25 3.75 3.75 0 0115.75 9z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 18a7.5 7.5 0 00-15 0"
-                />
-              </svg>
-              <span className="absolute top-0 right-0 h-4 w-4 rounded-full bg-yellow-400 text-xs flex items-center justify-center">
-                {count}
-              </span>
-            </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 11.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v4.5m18 0v6.75a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V11.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 11.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v4.5m18 0v6.75a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V11.25"
               />
             </svg>
           </div>
@@ -366,19 +371,19 @@ const Header = () => {
 
       {/* Submenu Render Logic */}
       {activeMenu && (
-        <div
-          className="absolute top-[121px] left-0 w-full bg-white shadow-lg z-50"
-          onMouseEnter={() => clearTimeout(hideTimeout)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="flex justify-center space-x-10">
-            {menuItems
-              .filter((menu) => menu.label === activeMenu)
-              .map((menu) =>
-                menu.items.map((section) =>
-                  section.items.map((item) =>
-                    item.subitems ? (
-                      <div
+          <div
+              className="absolute top-[121px] left-0 w-full bg-white shadow-lg z-50"
+              onMouseEnter={() => clearTimeout(hideTimeout)}
+              onMouseLeave={handleMouseLeave}
+          >
+            <div className="flex justify-center space-x-10">
+              {menuItems
+                  .filter((menu) => menu.label === activeMenu)
+                  .map((menu) =>
+                      menu.items.map((section) =>
+                          section.items.map((item) =>
+                              item.subitems ? (
+                                  <div
                         key={item.label}
                         className="flex flex-col px-10 py-3 "
                       >
